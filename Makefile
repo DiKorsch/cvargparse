@@ -1,5 +1,5 @@
 install:
-	python setup.py install
+	pip install . --no-deps --upgrade
 
 build:
 	python setup.py build
