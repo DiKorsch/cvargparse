@@ -1,5 +1,5 @@
-from cvargparse.utils import factory 
-from cvargparse.arguments import Argument as Arg
+from cvargparse.utils import factory
+from cvargparse.argument import Argument as Arg
 
 from abc import ABC
 
@@ -18,11 +18,11 @@ class BaseFactory(ABC):
 
 	def get(self):
 		return self.args
- 
+
 
 class ArgFactory(BaseFactory):
 	'''
-	
+
 	'''
 	@factory
 	def batch_size(self):

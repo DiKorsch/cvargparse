@@ -1,6 +1,7 @@
 import argparse, logging
 
-from arguments import Argument, FileArgument
+from cvargparse.argument import Argument as Arg
+from cvargparse.factory import ArgFactory
 
 class BaseParser(argparse.ArgumentParser):
 	def __init__(self, arglist=[], nologging=False, sysargs=None, *args, **kw):
