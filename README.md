@@ -26,7 +26,7 @@ def main(args):
         for batch in it:
             updater.train(model, batch)
     
-parser = GPUParser(ArgFactory([
+    parser = GPUParser(ArgFactory([
 		Arg("data", type=str),
 		Arg("labels", type=str),
 		Arg("model_weights", type=str),
