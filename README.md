@@ -30,7 +30,6 @@ def main(args):
 		Arg("data", type=str),
 		Arg("labels", type=str),
 		Arg("model_weights", type=str),
-
 	])\
 	.epochs()\
 	.batch_size()\
