@@ -5,7 +5,7 @@ Some sample code (with some pseudo DL framework):
 ```python
 from cvargparse import GPUParser, ArgFactory, Arg
 
-from dlframework import Model, LRSchedule, Updater, Iterator, to_gpu
+from dlframework import Model, LRSchedule, Updater, Iterator, to_gpu, load_data
 
 def main(args):
     data = load_data(args.data, args.labels)
