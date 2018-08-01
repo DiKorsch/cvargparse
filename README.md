@@ -44,3 +44,16 @@ main(parser.parse_args())
 
 ```
 
+This script can be called as following:
+
+```bash
+python script.py path/to/data path/to/labels path/to/model \
+    --gpu 0 1 \
+    -lr 0.001 -lrs 30 -lrd 0.1 -lrt 1e-7 \
+    --batch_size 32 \
+    --epochs 90 \
+    --loglevel DEBUG \
+    --logfile path/to/logs
+    
+```
+
