@@ -1,14 +1,14 @@
 import argparse, logging
 
 from cvargparse.argument import Argument as Arg
-from cvargparse.factory import ArgFactory
+from cvargparse.factory import BaseFactory
 
 class BaseParser(argparse.ArgumentParser):
 	def __init__(self, arglist=[], nologging=False, sysargs=None, *args, **kw):
 		super(BaseParser, self).__init__(*args, **kw)
 		self.__nologging = nologging
 		self.__sysargs = sysargs
-		if isinstance(arglist, ArgFactory):
+		if isinstance(arglist, BaseFactory):
 			arglist = arglist.get()
 
 		for arg in arglist:
