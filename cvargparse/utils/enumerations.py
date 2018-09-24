@@ -1,5 +1,6 @@
 from enum import Enum, EnumMeta
 
+import cvargparse
 
 class MetaBaseType(EnumMeta):
 	"""
@@ -39,3 +40,21 @@ class BaseChoiceType(Enum, metaclass=MetaBaseType):
 			return key
 		else:
 			raise ValueError("Unknown optimizer type: \"{}\"".format(key.__class__.__name__))
+
+	@classmethod
+	def as_arg(cls, name, short_name=None, help_text=None):
+
+		args = ["--{}".format(name)]
+
+		if short_name is not None:
+			args.append("-{}".format(short_name))
+
+		if help_text is None:
+			help_text = "choices for \"{}\"".format(name)
+
+		help_text += " (default: {})".format(cls.Default.name.lower())
+
+		return cvargparse.Arg(*args,
+			type=str, default=cls.Default.name.lower(),
+			choices=cls.as_choices(),
+			help=help_text)
