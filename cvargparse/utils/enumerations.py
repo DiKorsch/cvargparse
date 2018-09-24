@@ -15,7 +15,13 @@ class MetaBaseType(EnumMeta):
 		else:
 			return super(MetaBaseType, cls).__contains__(item)
 
-class BaseType(Enum, metaclass=MetaBaseType):
+	def __getitem__(cls, key):
+		"""
+			Redefines the "[]" operation.
+		"""
+		return cls.as_choices()[key.lower()]
+
+class BaseChoiceType(Enum, metaclass=MetaBaseType):
 	"""
 		Enum base type. Can be used to define argument choices.
 		It also enables to quickly creat, get and display the defined choices.
@@ -27,11 +33,9 @@ class BaseType(Enum, metaclass=MetaBaseType):
 
 	@classmethod
 	def get(cls, key):
-		key = key.lower()
-		choices = cls.as_choices()
-		if key in choices:
-			return choices.get(key)
-		elif cls.Default:
-			return cls.Default
+		if isinstance(key, str):
+			return cls[key] if key in cls else cls.Default
+		elif isinstance(key, cls):
+			return key
 		else:
-			raise KeyError('Unknown key and no default')
+			raise ValueError("Unknown optimizer type: \"{}\"".format(key.__class__.__name__))
