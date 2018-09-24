@@ -56,7 +56,10 @@ python script.py path/to/data path/to/labels path/to/model \
 
 ## Main Features
 
-### ArgFactory
+### Argument Factory
+* pre-defined frequently used arguments
+* each factory method return the factory itself, hence one can chain the factory calls
+* some factory methods support default value definition
 
 ```python
 from cvargparse import GPUParser, ArgFactory, Arg
@@ -78,6 +81,11 @@ args = parser.parse_args()
 ```
 
 ### Argument Choices
+* case insensitive
+* deafult choice definition
+* automatic argument generation
+* pythonic way of argument-to-value access
+
 ```python
 import logging
 from cvargparse.utils import BaseChoiceType
