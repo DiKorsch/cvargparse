@@ -42,7 +42,7 @@ class BaseChoiceType(Enum, metaclass=MetaBaseType):
 			raise ValueError("Unknown optimizer type: \"{}\"".format(key.__class__.__name__))
 
 	@classmethod
-	def as_arg(cls, name, short_name=None, help_text=None):
+	def as_arg(cls, name, short_name=None, default=None, help_text=None, **kwargs):
 
 		args = ["--{}".format(name)]
 
@@ -52,9 +52,12 @@ class BaseChoiceType(Enum, metaclass=MetaBaseType):
 		if help_text is None:
 			help_text = "choices for \"{}\"".format(name)
 
-		help_text += " (default: {})".format(cls.Default.name.lower())
+		default = default or cls.Default.name.lower()
+
+		help_text += " (default: {})".format(default)
 
 		return cvargparse.Arg(*args,
-			type=str, default=cls.Default.name.lower(),
+			type=str, default=default,
 			choices=cls.as_choices(),
-			help=help_text)
+			help=help_text,
+			**kwargs)
