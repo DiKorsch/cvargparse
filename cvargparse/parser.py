@@ -1,4 +1,5 @@
-import argparse, logging
+import argparse
+import logging
 
 from cvargparse.argument import Argument as Arg
 from cvargparse.factory import BaseFactory

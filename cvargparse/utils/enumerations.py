@@ -1,6 +1,7 @@
-from enum import Enum, EnumMeta
+from enum import Enum
+from enum import EnumMeta
 
-import cvargparse
+from cvargparse import Arg
 
 class MetaBaseType(EnumMeta):
 	"""
@@ -56,7 +57,7 @@ class BaseChoiceType(Enum, metaclass=MetaBaseType):
 
 		help_text += " (default: {})".format(default)
 
-		return cvargparse.Arg(*args,
+		return Arg(*args,
 			type=str, default=default,
 			choices=cls.as_choices(),
 			help=help_text,

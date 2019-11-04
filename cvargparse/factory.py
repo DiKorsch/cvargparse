@@ -1,7 +1,8 @@
+from abc import ABC
+
 from cvargparse.utils import factory
 from cvargparse.argument import Argument as Arg
 
-from abc import ABC
 
 class BaseFactory(ABC):
 	'''
