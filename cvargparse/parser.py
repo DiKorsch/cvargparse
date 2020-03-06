@@ -5,32 +5,60 @@ from cvargparse.argument import Argument as Arg
 from cvargparse.factory import BaseFactory
 
 class BaseParser(argparse.ArgumentParser):
+
 	def __init__(self, arglist=[], nologging=False, sysargs=None, *args, **kw):
-		super(BaseParser, self).__init__(*args, **kw)
 		self.__nologging = nologging
 		self.__sysargs = sysargs
-		if isinstance(arglist, BaseFactory):
-			arglist = arglist.get()
+		self._groups = {}
 
-		for arg in arglist:
-			if isinstance(arg, Arg):
-				self.add_argument(*arg.args, **arg.kw)
-			else:
-				self.add_argument(*arg[0], **arg[1])
+		super(BaseParser, self).__init__(*args, **kw)
 
+		self.add_args(arglist)
 
 		if not self.has_logging: return
 
-		self.add_argument(
+		group = self.add_argument_group("Logger arguments")
+		group.add_argument(
 			'--logfile', type=str, default='',
 			help='file for logging output')
 
-		self.add_argument(
+		group.add_argument(
 			'--loglevel', type=str, default='INFO',
 			help='logging level. see logging module for more information')
 
 		self.__args = None
 
+
+	def get_group(self, name):
+		return self._groups.get(name)
+
+	def has_group(self, name):
+		return name in self._groups
+
+
+	def add_argument_group(self, title, *args, **kwargs):
+		group = super(BaseParser, self).add_argument_group(title=title, *args, **kwargs)
+		self._groups[title] = group
+		return group
+
+
+	def add_args(self, arglist, group_name=None, group_kwargs={}):
+
+		if isinstance(arglist, BaseFactory):
+			arglist = arglist.get()
+
+		if group_name is None:
+			group = self
+		elif self.has_group(group_name):
+			group = self.get_group(group_name)
+		else:
+			group = self.add_argument_group(group_name, **group_kwargs)
+
+		for arg in arglist:
+			if isinstance(arg, Arg):
+				group.add_argument(*arg.args, **arg.kw)
+			else:
+				group.add_argument(*arg[0], **arg[1])
 
 	@property
 	def args(self):

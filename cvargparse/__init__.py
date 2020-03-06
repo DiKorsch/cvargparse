@@ -1,4 +1,4 @@
-__version__ = "0.1.6"
+__version__ = "0.2.0"
 
 from cvargparse.argument import Argument
 from cvargparse.argument import FileArgument
