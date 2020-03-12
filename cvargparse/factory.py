@@ -37,7 +37,7 @@ class ArgFactory(BaseFactory):
 
 	@factory
 	def debug(self):
-		self.add('--debug', action='store_true', help='enable chainer debug mode')
+		self.add('--debug', action='store_true', help='enable debug mode')
 
 
 	@factory
