@@ -69,7 +69,7 @@ class BaseParser(argparse.ArgumentParser):
 		self._args = super(BaseParser, self).parse_args(*args, **kwargs)
 
 		if self.has_logging:
-			self._logging_config(self._args)
+			self._logging_config()
 
 		return self._args
 
