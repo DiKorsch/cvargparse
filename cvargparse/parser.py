@@ -65,8 +65,8 @@ class BaseParser(argparse.ArgumentParser):
 	def has_logging(self):
 		return not self._nologging
 
-	def parse_args(self, *args, **kwargs):
-		self._args = super(BaseParser, self).parse_args(*args, **kwargs)
+	def parse_args(self, args=None, namespace=None):
+		self._args = super(BaseParser, self).parse_args(args, namespace)
 
 		if self.has_logging:
 			self._logging_config()
