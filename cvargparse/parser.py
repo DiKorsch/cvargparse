@@ -37,8 +37,8 @@ class BaseParser(argparse.ArgumentParser):
 		return name in self._groups
 
 
-	def add_argument_group(self, title, *args, **kwargs):
-		group = super(BaseParser, self).add_argument_group(title=title, *args, **kwargs)
+	def add_argument_group(self, title, description=None, *args, **kwargs):
+		group = super(BaseParser, self).add_argument_group(title=title, description=description, *args, **kwargs)
 		self._groups[title] = group
 		return group
 
