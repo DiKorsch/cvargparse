@@ -34,13 +34,15 @@ class BaseChoiceType(Enum, metaclass=MetaBaseType):
 		return {e.name.lower(): e for e in cls}
 
 	@classmethod
-	def get(cls, key):
-		if isinstance(key, str):
-			return cls[key] if key in cls else cls.Default
-		elif isinstance(key, cls):
+	def get(cls, key=None):
+
+		if isinstance(key, str) and key in cls:
+			return cls[key]
+
+		if isinstance(key, cls):
 			return key
-		else:
-			raise ValueError("Unknown optimizer type: \"{}\"".format(key.__class__.__name__))
+
+		return cls.Default
 
 	@classmethod
 	def as_arg(cls, name, short_name=None, default=None, help_text=None, **kwargs):
