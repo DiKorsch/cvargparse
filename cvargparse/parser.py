@@ -80,7 +80,8 @@ class BaseParser(argparse.ArgumentParser):
 		else:
 			handler = logging.StreamHandler()
 
-		fmt = '%(message)s' if simple else '%(levelname)s - [%(asctime)s] %(filename)s:%(lineno)d [%(funcName)s]: %(message)s'
+		# fmt = '%(message)s' if simple else '%(levelname)s - [%(asctime)s] %(filename)s:%(lineno)d [%(funcName)s]: %(message)s'
+		fmt = '{message}' if simple else '{levelname: ^7s} - [{asctime}] {filename}:{lineno} [{funcName}]: {message}'
 		if getattr(self._args, "debug", False):
 			lvl = logging.DEBUG
 		else:
