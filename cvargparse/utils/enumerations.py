@@ -1,3 +1,5 @@
+import warnings
+
 from enum import Enum
 from enum import EnumMeta
 
@@ -42,6 +44,7 @@ class BaseChoiceType(Enum, metaclass=MetaBaseType):
 		if isinstance(key, cls):
 			return key
 
+		warnings.warn(f"\"{key}\" not found in choices. Returning default value!")
 		return cls.Default
 
 	@classmethod
