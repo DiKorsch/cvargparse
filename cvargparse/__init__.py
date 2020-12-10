@@ -6,8 +6,9 @@ Arg = Argument
 
 from cvargparse.factory import ArgFactory
 from cvargparse.factory import BaseFactory
-from cvargparse.parser import BaseParser
-from cvargparse.parser import GPUParser
+from cvargparse.parser.base import BaseParser
+from cvargparse.parser.gpu_parser import GPUParser
+from cvargparse.parser.mode_parser import ModeParserFactory
 
 __all__ = [
 	"Arg",
@@ -16,5 +17,6 @@ __all__ = [
 	"ArgFactory",
 	"BaseFactory",
 	"BaseParser",
+	"ModeParserFactory",
 	"GPUParser",
 ]
