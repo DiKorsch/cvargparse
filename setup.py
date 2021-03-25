@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
-import os
-import pkg_resources
-import sys
+from pathlib import Path
 
 from setuptools import setup, find_packages
 
@@ -10,13 +8,18 @@ try: # for pip >= 10
 	from pip._internal.req import parse_requirements
 except ImportError: # for pip <= 9.0.3
 	from pip.req import parse_requirements
+pkg_name = "cvargparse"
 
-import cvargparse
+cwd = Path(__file__).parent.resolve()
+# Get __version__ variable
+with open(str(cwd / pkg_name / '_version.py')) as version_file:
+	exec(version_file.read())
+
 # install_requires = [line.strip() for line in open("requirements.txt").readlines()]
 
 setup(
-	name='cvargparse',
-	version=cvargparse.__version__,
+	name=pkg_name,
+	version=__version__,
 	description='simple argparse wrapper with some syntactic sugar',
 	author='Dimitri Korsch, Christoph Theiß',
 	author_email='korschdima@gmail.com, theisz.cm@gmail.com',
