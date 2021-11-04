@@ -63,16 +63,22 @@ class FieldWrapper:
 		self._field = field
 
 	def as_arg(self) -> Arg:
-		return Arg(
-			self.name,
-			type=self.type,
-			default=self.default,
-			choices=self.choices
-		)
+		return Arg(self.name, **self.arg_kwargs)
 
 	@property
 	def field(self):
 		return self._field
+
+	@property
+	def arg_kwargs(self):
+		if self.is_option:
+			return dict(action=self.action)
+
+		return dict(
+			type=self.type,
+			default=self.default,
+			choices=self.choices,
+		)
 
 	@property
 	def name(self):
@@ -83,14 +89,36 @@ class FieldWrapper:
 		return isinstance(self.field.type, Choices)
 
 	@property
+	def is_option(self):
+		return self.field.type == bool
+
+	@property
+	def action(self):
+		if not self.is_option:
+			return
+
+		actions = {
+			True:  "store_false",
+			False: "store_true"
+		}
+
+		return actions.get(self.field.default)
+
+	@property
 	def type(self):
 		if self.is_choice:
 			return self.field.type._type
+
+		if self.is_option:
+			return None
 
 		return self.field.type
 
 	@property
 	def default(self):
+
+		if self.is_option:
+			return None
 
 		if self.field.default == MISSING:
 			return self.type()
