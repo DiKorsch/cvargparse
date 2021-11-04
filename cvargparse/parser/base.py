@@ -6,7 +6,10 @@ import warnings
 
 from cvargparse.argument import Argument as Arg
 from cvargparse.factory import BaseFactory
+from cvargparse.utils.dataclass import get_arglist_from_data_class
 from cvargparse.utils.logger_config import init_logging_handlers
+
+from dataclasses import is_dataclass
 
 class LoggerMixin(abc.ABC):
 
@@ -78,6 +81,9 @@ class BaseParser(LoggerMixin, argparse.ArgumentParser):
 
 		if isinstance(arglist, BaseFactory):
 			arglist = arglist.get()
+
+		elif is_dataclass(arglist):
+			arglist, group_name = get_arglist_from_data_class(arglist)
 
 		if group_name is None:
 			group = self
