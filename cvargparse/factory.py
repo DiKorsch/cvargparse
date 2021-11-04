@@ -1,21 +1,21 @@
-from abc import ABC
+import abc
+import typing as T
 
 from cvargparse.utils import factory
 from cvargparse.argument import Argument as Arg
 
 
-class BaseFactory(ABC):
+class BaseFactory(abc.ABC):
 	'''
 
 	'''
-	def __init__(self, initial=None):
+	def __init__(self, initial: T.Optional[T.List[Arg]] = None):
 		super(BaseFactory, self).__init__()
 		self.args = initial or []
 
 	@factory
 	def add(self, *args, **kwargs):
 		self.args.append(Arg(*args, **kwargs))
-
 
 	def get(self):
 		return self.args

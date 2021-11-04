@@ -1,7 +1,7 @@
 from cvargparse.argument import Argument
+from cvargparse.argument import Argument as Arg
 from cvargparse.argument import FileArgument
-Arg = Argument
-
+from cvargparse.argument import JupyterArguments
 from cvargparse.factory import ArgFactory
 from cvargparse.factory import BaseFactory
 from cvargparse.parser.base import BaseParser
