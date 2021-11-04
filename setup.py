@@ -15,7 +15,7 @@ cwd = Path(__file__).parent.resolve()
 with open(str(cwd / pkg_name / '_version.py')) as version_file:
 	exec(version_file.read())
 
-# install_requires = [line.strip() for line in open("requirements.txt").readlines()]
+install_requires = [line.strip() for line in open("requirements.txt").readlines()]
 
 setup(
 	name=pkg_name,
@@ -28,7 +28,7 @@ setup(
 	zip_safe=False,
 	setup_requires=[],
 	# no requirements yet
-	# install_requires=install_requires,
+	install_requires=install_requires,
 	package_data={'': ['requirements.txt']},
 	data_files=[('.',['requirements.txt'])],
 	include_package_data=True,

@@ -27,6 +27,7 @@ __all__ = [
 if __name__ == '__main__':
 	@cvdataclass
 	class Args:
+		group_name = "args"
 
 		arg1: float = None
 		arg2: str = "something"
@@ -34,4 +35,4 @@ if __name__ == '__main__':
 		arg3: Choices([1, 2, 3], int) = 1
 
 	parser = BaseParser(Args(arg3=2))
-	print(parser.parse_args())
+	print(parser.parse_args("--help".split()))
