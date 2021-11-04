@@ -29,11 +29,12 @@ if __name__ == '__main__':
 	class Args:
 		group_name = "args"
 
-		arg1: float = None
+		train_samples: float = None
+		test_samples: int = 2
 		arg2: str = "something"
 
 		arg3: Choices([1, 2, 3], int) = 1
 		is_arg4: bool = False
 
-	parser = BaseParser(Args)
+	parser = BaseParser(Args(test_samples=20))
 	print(parser.parse_args("--is_arg4".split()))

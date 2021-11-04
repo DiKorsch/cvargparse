@@ -86,8 +86,9 @@ class BaseParser(LoggerMixin, argparse.ArgumentParser):
 
 		elif is_dataclass(arglist):
 			self._dataclass_instance = arglist
-			arglist, group_name = get_arglist(arglist)
-
+			arglist, _group_name = get_arglist(arglist)
+			if group_name is None:
+				group_name = _group_name
 
 		if group_name is None:
 			group = self
