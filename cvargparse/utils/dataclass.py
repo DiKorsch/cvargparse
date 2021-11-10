@@ -29,11 +29,17 @@ def as_args(instance) -> list:
 
 	data = asdict(instance)
 	for field in fields(instance):
+		wrapped = FieldWrapper(field)
 		key = field.name
 		value = data[key]
 		if value == field.default:
 			continue
-		dataclass_args.extend(f"--{key} {value}".split())
+		elif wrapped.is_option:
+			arg_strings = [f"--{key}"]
+		else:
+			arg_strings = f"--{key} {value}".split()
+
+		dataclass_args.extend(arg_strings)
 
 	return dataclass_args
 
