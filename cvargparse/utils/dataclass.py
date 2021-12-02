@@ -23,10 +23,10 @@ def get_arglist(cls_or_instance) -> list:
 
 def as_args(instance) -> list:
 
-	dataclass_args = []
 	if not _is_dataclass_instance(instance):
-		return dataclass_args
+		return None
 
+	dataclass_args = []
 	data = asdict(instance)
 	for field in fields(instance):
 		wrapped = FieldWrapper(field)
