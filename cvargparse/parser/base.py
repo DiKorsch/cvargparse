@@ -80,6 +80,17 @@ class BaseParser(LoggerMixin, argparse.ArgumentParser):
 
 		self.add_args(arglist)
 
+	def add_choices(self, dest, *choices):
+		for action in self._actions:
+			if action.dest == dest:
+				assert action.choices is not None, \
+					f"{action} has no choices!"
+
+				action.choices.extend(choices)
+				break
+		else:
+			raise ValueError("Argument with destination \"{dest}\" was not found!")
+
 
 	@property
 	def args(self):
