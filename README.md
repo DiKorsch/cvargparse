@@ -92,7 +92,7 @@ args = parser.parse_args()
 
 ### Argument Choices
 * case insensitive
-* deafult choice definition
+* default choice definition
 * automatic argument generation
 * pythonic way of argument-to-value access
 
