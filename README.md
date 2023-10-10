@@ -1,9 +1,17 @@
 # Wrapper for `argparse`
 
-Some sample code (with some pseudo DL framework): 
+## Installation
+
+`pip install cvargparse`
+
+## Usage
+
+Some sample code (with some pseudo DL framework):
 
 ```python
-from cvargparse import GPUParser, ArgFactory, Arg
+from cvargparse import GPUParser
+from cvargparse import ArgFactory
+from cvargparse import Arg
 
 from dlframework import Model, LRSchedule, Updater, Iterator, to_gpu, load_data
 
@@ -25,8 +33,8 @@ def main(args):
     for epoch in range(args.epochs):
         for batch in it:
             updater.train(model, batch)
-    
-parser = GPUParser(ArgFactory([
+
+ArgFactory([
 	Arg("data", type=str),
 	Arg("labels", type=str),
 	Arg("model_weights", type=str),
@@ -36,7 +44,9 @@ parser = GPUParser(ArgFactory([
 .learning_rate(lr=1e-3)\
 .weight_decay(5e-3)\
 .seed()\
-.debug())
+.debug()
+
+parser = GPUParser(factory)
 
 parser.init_logger()
 main(parser.parse_args())
