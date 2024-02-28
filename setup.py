@@ -19,7 +19,7 @@ install_requires = [line.strip() for line in open("requirements.txt").readlines(
 
 setup(
 	name=pkg_name,
-	version=__version__,
+	version=__version__,  # noqa: F821
 	description='simple argparse wrapper with some syntactic sugar',
 	author='Dimitri Korsch, Christoph Theiß',
 	author_email='korschdima@gmail.com, theisz.cm@gmail.com',
