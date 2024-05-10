@@ -48,7 +48,7 @@ def cvdataclass(cls=None, *args, repr=False, **kwargs):
 
 	def _yaml_repr_(self) -> str:
 		cls_name = type(self).__name__
-		return yaml.dump({cls_name: self.__dict__}, sort_dicts=False)
+		return yaml.dump({cls_name: self.__dict__}, sort_keys=False)
 
 	def wrap(cls):
 		if not repr:
